@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<!-- coded by Marcos Martins in april, 2020. -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<title>This program will test whether a number informed is a leap year or not. </title>
+</head>
+<body>
+	<script>
+		// The variable $ind is short for index.
+		var ind = prompt("Please type any year: ");
+		var year = new Array();
+		var leapYear = null;
+
+		if((ind % 400 === 0) || (ind % 4 === 0 && ind % 100 != 0)){
+			if(!ind){
+				alert("Please type in a leap year! Field cannot be null.");
+				document.write("<small style='color:blue'>Press F5 to reboot the page <b>:D<b></small>");
+			}else{
+				
+				alert(ind + " is a leap year!");
+				leapYear = true;
+				year.push(ind);
+				console.log(year[ind]);
+				document.write("Leap Year: <br>" + ind);
+			}
+		}
+		else {
+			alert(ind + " is not a leap year.  :( ");
+			leapYear = false;
+			ind = prompt("Type in another leap year ");
+			while(leapYear == false){
+				if(ind == ''){
+					alert("You must type a value into the field!");
+				}
+				year.push(ind);
+				console.log(year[ind]);
+				document.write("<br>Not a leap year: " + ind);
+				ind = prompt(ind + " isn't a leap year. Try again: ");
+				if((ind % 400 === 0) || (ind % 4 === 0 && ind % 100 !== 0)){
+					leapYear = true;
+					alert(ind + " is a leap year! Congrats!");
+					year.push(ind);
+					console.log(leapYear[ind]);
+					document.write("<br><b>Leap year: </b>" + ind);
+					break;	
+				}
+
+			}
+			year.push(ind);
+			console.log(year[ind]);
+			document.write("<br>" + ind);
+		}
+	</script>
+</body>
+</html>
