@@ -1,47 +1,39 @@
 // Initialize the year array to store leap years
 var year = [];
 
+// Get the form element from the DOM
+var formEl = document.getElementById("yearForm");
+
 // Get the message element from the DOM
 var messageEl = document.getElementById("message");
 
-// Loop to continue prompting for leap years until the user decides to stop
-while (true) {
-  // Prompt the user for a year
-  var ind = prompt(
-    "Please type a leap year, or type 'stop' to end the process:"
-  );
-
-  // Check if the user wants to stop the process
-  if (ind === "stop") {
-    break;
-  }
+// Handle form submit event
+formEl.addEventListener("submit", function (event) {
+  event.preventDefault(); // prevent form submission
+  var ind = event.target.elements.year.value; // get year input value
 
   // Check if the input is a valid year
   if (isNaN(ind) || ind === "") {
     messageEl.innerHTML = "Please enter a valid year.";
-    continue;
+    return;
   }
 
   // Check if the year is a leap year
   if (ind % 400 === 0 || (ind % 4 === 0 && ind % 100 !== 0)) {
     messageEl.innerHTML = ind + " is a leap year!";
     year.push(ind);
-    console.log(year[ind]);
-    document.write("<br><b>Leap year: </b>" + ind);
+    document.getElementById("leapYears").innerHTML +=
+      "<br><b>Leap year: </b>" + ind;
   } else {
     messageEl.innerHTML = ind + " is not a leap year.  :( ";
-    continue;
   }
-}
 
-// Display the leap years stored in the year array
-if (year.length > 0) {
-  var leapYearsEl = document.createElement("div");
-  leapYearsEl.innerHTML = "<br><br>Leap Years:<br>";
-  for (var i = 0; i < year.length; i++) {
-    leapYearsEl.innerHTML += year[i] + "<br>";
-  }
-  document.body.appendChild(leapYearsEl);
-}
+  // Clear the form input
+  event.target.reset();
+});
 
-const reset = document.querySelector(".restart");
+// Handle restart button click event
+document.querySelector(".restart").addEventListener("click", function () {
+  year = []; // clear the year array
+  document.getElementById("leapYears").innerHTML = ""; // clear the leap year display
+});
